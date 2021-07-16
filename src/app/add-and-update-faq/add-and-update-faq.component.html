@@ -16,7 +16,7 @@
 </div>
 
 <form [formGroup]="faqForm" (submit)="onSave()">
-  <input type="hidden" formControlName="_id" [(ngModel)]="_id"/>
+  <input type="hidden" formControlName="_id" [(ngModel)]="_id" />
   <p>
     <mat-form-field class="ques-form-field" appearance="fill">
       <mat-label style="color: black; font-size: large"
@@ -34,7 +34,7 @@
       >
     </mat-form-field>
   </p>
-
+  <!--
   <p>
     <mat-form-field class="answer-form-field" appearance="fill">
       <mat-label style="color: black; font-size: large"
@@ -44,12 +44,32 @@
         matInput
         formControlName="ansFormControl"
         [(ngModel)]="description"
-        placeholder="Type your answer"
+        placeholder="Type your description"
       ></textarea>
       <mat-error *ngIf="faqForm.controls['ansFormControl'].errors?.required"
         >Description is Mandatory</mat-error
       >
     </mat-form-field>
+  </p>-->
+  <p class="answer-form-field">
+    <mat-label style="color: black; font-size: large"
+      ><b>Description</b></mat-label
+    >
+    
+    <ckeditor
+      [(ngModel)]="description"
+      formControlName="ansFormControl"
+      placeholder ="Enter your description..."
+      [config]= "ckeConfig"
+    >
+    </ckeditor>
+    <mat-error
+      *ngIf="
+        faqForm.controls['ansFormControl'].touched &&
+        faqForm.controls['ansFormControl'].errors?.required
+      "
+      >Description is Mandatory</mat-error
+      >
   </p>
 
   <p>
@@ -79,12 +99,12 @@
         matInput
         pattern="https://.*"
         formControlName="linkFormControl"
-        [(ngModel)] = "link"
+        [(ngModel)]="link"
         placeholder="https://example.com"
       />
       <mat-error *ngIf="faqForm.controls['linkFormControl'].errors?.pattern"
-            >Only URL's are allowed</mat-error
-          >
+        >Only URL's are allowed</mat-error
+      >
     </mat-form-field>
   </p>
 

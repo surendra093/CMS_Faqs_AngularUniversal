@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+//import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { AddAndUpdateFaqComponent } from '../add-and-update-faq/add-and-update-faq.component';
 import { NotificationService } from '../shared/notification.service';
 import { FaqService } from '../shared/faq.service';
 import { Faq } from '../shared/faq.model';
 import { DialogService } from '../shared/dialog.service';
+
+declare var CKEDITOR: any;
 
 @Component({
   selector: 'app-faqs',
@@ -31,7 +34,8 @@ export class FaqsComponent implements OnInit {
   searchValue : string;
   p: number = 1;
   public maxSize: number = 5;
-
+  //public Editor = ClassicEditor;
+  
   _id           : string;
   question      : string;
   description   : string;
@@ -45,6 +49,7 @@ export class FaqsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
+    dialogConfig.height = "100%";
     const dialogRef = this.dialog.open(AddAndUpdateFaqComponent,dialogConfig);
 
     dialogRef.afterClosed().subscribe( result => {
@@ -64,6 +69,7 @@ export class FaqsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "100%";
+    dialogConfig.height = "100%";
     dialogConfig.data = faq;
     const dialogRef = this.dialog.open(AddAndUpdateFaqComponent,dialogConfig);
 
@@ -128,7 +134,7 @@ export class FaqsComponent implements OnInit {
      
                this.getFaqs();
                
-               this.notificationService.warn(':: Deactivated successfully');
+               this.notificationService.success(':: Deactivated successfully');
                 },(err)=>{
                  this.notificationService.warn('!Something went wrong');
                });
@@ -168,6 +174,7 @@ export class FaqsComponent implements OnInit {
     this.faqService.getFaqs()
       .subscribe((faqs:any) => 
           this.faqs = faqs)
+         // this.htmlString = this.faq.description)
    /*
    this.faqService.getFaqs()
        .subscribe((faq:any) => 

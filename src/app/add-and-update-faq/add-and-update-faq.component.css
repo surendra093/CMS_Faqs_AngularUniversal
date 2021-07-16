@@ -19,14 +19,12 @@ div.container {
 }
 
 .ques-form-field {
-  width: 1025px;
+  width: 1005px;
   margin-top: 30px;
   margin-left: 15px;
 }
 
 .answer-form-field {
-  width: 1025px;
-  margin-top: 20px;
   margin-left: 15px;
 }
 

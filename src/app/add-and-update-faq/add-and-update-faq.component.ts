@@ -39,18 +39,25 @@ export class AddAndUpdateFaqComponent implements OnInit {
 
   catagories :  Catagory[];
   catagory   :  Catagory;
-
+  //Editor:any;
+  ckeConfig: any;
 
   ngOnInit(): void {  
      this.getCatagories();
+     this.ckeConfig = {    
+      allowedContent: true,
+      extraPlugins: ['divarea','placeholder'],    
+      forcePasteAsPlainText: true    
+    };  
   }
+
 
   faqs : Faq[] = [];
   faq  : Faq;
 
   _id           : string;
   question      : string;
-  description   : string;
+  description   : any;
   catagoryName  : string;
   link          : string;
   status        : Boolean;

@@ -82,7 +82,7 @@
         >
           <td>{{ faq.question }}</td>
           <td>
-            {{ faq.description }}<br />
+            <div [innerHTML]="faq.description | safeHtml"></div>
             <a href="{{ faq.link }}" target="_blank">{{ faq.link }}</a>
           </td>
           <td>

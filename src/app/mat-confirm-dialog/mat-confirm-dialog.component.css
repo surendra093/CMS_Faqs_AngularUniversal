@@ -22,20 +22,18 @@
 
 #no-button {
   height: 50px;
-  width: 40%;
+  width: 50%;
   background-color: #fc7169;
   color: white;
   border-radius: 0px;
-  margin-left: 30px;
 }
 
 #yes-button {
   height: 50px;
-  width: 40%;
+  width: 50%;
   background-color: #b6bece;
   color: white;
   border-radius: 0px;
-  margin-left: 20px;
 }
 
 span.content-span {
