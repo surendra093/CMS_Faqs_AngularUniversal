@@ -34,7 +34,6 @@ export class FaqsComponent implements OnInit {
   searchValue : string;
   p: number = 1;
   public maxSize: number = 5;
-  //public Editor = ClassicEditor;
   
   _id           : string;
   question      : string;
@@ -174,7 +173,6 @@ export class FaqsComponent implements OnInit {
     this.faqService.getFaqs()
       .subscribe((faqs:any) => 
           this.faqs = faqs)
-         // this.htmlString = this.faq.description)
    /*
    this.faqService.getFaqs()
        .subscribe((faq:any) => 

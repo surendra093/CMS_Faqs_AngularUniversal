@@ -4,8 +4,10 @@ import {ErrorStateMatcher} from '@angular/material/core';
 
 import {Catagory} from '../shared/catagory.model';
 import { CatagoryService } from '../shared/catagory.service';
+import { FaqService} from '../shared/faq.service';
 import {NotificationService} from '../shared/notification.service';
 import { DialogService } from '../shared/dialog.service';
+import { Faq } from '../shared/faq.model';
 
 // define custom ErrorStateMatcher
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
@@ -18,7 +20,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
-  providers: [CatagoryService]
+  providers: [CatagoryService,FaqService]
 })
 
 export class CategoriesComponent implements OnInit {
@@ -32,29 +34,90 @@ export class CategoriesComponent implements OnInit {
   errorMatcher = new CustomErrorStateMatcher();
   
   constructor(public CatagorysService: CatagoryService,
+     public faqService: FaqService,
      public notificationService: NotificationService,
      private dialogService: DialogService) { }
 
   catagories: Catagory[] = [];
   catagory : Catagory;
+  faqs: Faq[];
+  faq : Faq;
+
   searchValue : string;
   p: number = 1;
   public maxSize: number = 5;
 
   ngOnInit(): void {
        this.getCatagories();
+       this.getFaqs();
   }
 
   private  getCatagories(){
     this.CatagorysService.getCatagories()
       .subscribe((catagories:any) => 
-          this.catagories = catagories)
-   /*
-   this.service.getOpenings()
-       .subscribe((opening:any) => 
-           this.tempArr = opening)*/
+          {
+            this.catagories = catagories
+          })
   }
 
+  /*
+  private getFaqs(){
+    this.faqService.getFaqs()
+        .subscribe((faqs:any) => 
+          { 
+              this.faqs = faqs;
+              /*
+              let i=0;
+              for(let eachCatagory of this.catagories){
+                  let count = 0;
+                  for(let eachFaq of this.faqs){
+                      if(eachCatagory.catagoryField === eachFaq.catagoryName){
+                           count++;
+                      }
+                      
+                  }
+                  let count_object = this.faq_count = {
+                      catagory : eachCatagory.catagoryField,
+                      count    : count
+                  }
+                  this.faqs_count.push(count_object);
+                  i++;
+              }
+              console.log(this.faqs_count);*/
+          /*})
+  }*/
+
+  private  getFaqs(){
+    this.faqService.getFaqs()
+      .subscribe((faqs:any) =>
+      { 
+          this.faqs = faqs
+          for(let eachCatagory of this.catagories){
+            let count = 0;
+            for(let eachFaq of this.faqs){
+              if(eachCatagory.catagoryField === eachFaq.catagoryName){
+                   eachCatagory.faq_count++;
+                   /*
+                   count++;
+                   const updatedCatagory = {
+                       _id                : eachCatagory._id,
+                       catagoryField      : eachCatagory.catagoryField,
+                       Date               : eachCatagory.Date,
+                       faq_count          : count  
+                   }
+                   console.log(updatedCatagory);*/
+                   /*
+                   this.CatagorysService.updateCatagory(updatedCatagory)
+                   .subscribe(()=>{
+
+                  })*/
+              }
+            }
+          }
+          
+      })
+  }
+  
   Reset() {
     this.catagoryForm.reset();
   }
@@ -68,7 +131,8 @@ export class CategoriesComponent implements OnInit {
   
   _id             : string;
   catagoryField   : string;
-  
+  faq_count       : number;
+
   onSubmit(){
 
     if(this.catagoryForm.valid){
@@ -77,6 +141,7 @@ export class CategoriesComponent implements OnInit {
                _id                : this._id,
                catagoryField      : this.catagoryField,
                Date               : Date.now(),
+               faq_count          : 0
           } 
          
           this.CatagorysService.addCatagory(newCatagory)

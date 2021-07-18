@@ -47,7 +47,7 @@ export class AddAndUpdateFaqComponent implements OnInit {
      this.ckeConfig = {    
       allowedContent: true,
       extraPlugins: ['divarea','placeholder'],    
-      forcePasteAsPlainText: true    
+      forcePasteAsPlainText: false    
     };  
   }
 

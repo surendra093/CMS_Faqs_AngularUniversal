@@ -30,10 +30,6 @@
     <span><b>FAQ</b></span>
     <mat-icon class="arrow1">chevron_right</mat-icon>
     <span><b>Catagories</b></span>
-    <!--
-    <mat-icon class="arrow1">chevron_right</mat-icon>
-    <span><b>Catagories</b></span>
-    -->
   </mat-toolbar>
 </div>
 
@@ -86,6 +82,7 @@
       <thead>
         <tr>
           <th>CATAGORIES</th>
+          <th>No.of FAQ</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -94,14 +91,26 @@
           *ngFor="
             let catagory of catagories
               | searchfilter: searchValue
-              | paginate: { itemsPerPage: 7, currentPage: p }
+              | paginate: { itemsPerPage: 7, currentPage: p };
+            let i = index
           "
         >
           <td>{{ catagory.catagoryField }}</td>
+          <td>{{ catagory.faq_count }}</td>
           <td>
-            <a class="action-btn" (click)="deleteCatgory(catagory._id)">
-              <i class="material-icons">delete</i>
-            </a>
+            <div
+              class="disable_pointer"
+              *ngIf="catagory.faq_count != 0; else activate"
+            >
+              <a class="disable" (click)="deleteCatgory(catagory._id)">
+                <i class="material-icons">delete</i>
+              </a>
+            </div>
+            <ng-template #activate>
+              <a class="action-btn" (click)="deleteCatgory(catagory._id)">
+                <i class="material-icons">delete</i>
+              </a>
+            </ng-template>
           </td>
         </tr>
       </tbody>

@@ -2,5 +2,6 @@ export class Catagory{
     
     _id             : string;
     catagoryField   : string;
-    No              : number;
+    Date            : Date;
+    faq_count       : number;
 }
