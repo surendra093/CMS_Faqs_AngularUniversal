@@ -30,9 +30,6 @@
     <span><b>FAQ</b></span>
     <mat-icon class="arrow1">chevron_right</mat-icon>
     <span><b>Faqs List</b></span>
-    <!--
-    <mat-icon class="arrow1">chevron_right</mat-icon>
-    <span><b>Faqs</b></span>-->
   </mat-toolbar>
 </div>
 
@@ -48,6 +45,11 @@
       placeholder="Search for Faq"
     />
   </span>
+  <label class="cont"
+    ><b>Show Displayed Faqs</b>
+    <input type="checkbox" class="status" (change)="onChange($event)" />
+    <span class="checkmark"></span>
+  </label>
   <button class="btn" (click)="addFaqPopUp()">Add New FAQ</button>
 </div>
 
@@ -94,7 +96,7 @@
               <i class="material-icons">edit</i>
             </a>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="action-btn2" (click)="deleteFaq(faq._id)">
+            <a class="action-btn2" (click)="deleteFaq(faq)">
               <i class="material-icons">delete</i>
             </a>
             &nbsp;&nbsp;

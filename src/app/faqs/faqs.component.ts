@@ -5,7 +5,9 @@ import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { AddAndUpdateFaqComponent } from '../add-and-update-faq/add-and-update-faq.component';
 import { NotificationService } from '../shared/notification.service';
 import { FaqService } from '../shared/faq.service';
+import { CatagoryService } from '../shared/catagory.service';
 import { Faq } from '../shared/faq.model';
+import { Catagory } from '../shared/catagory.model';
 import { DialogService } from '../shared/dialog.service';
 
 declare var CKEDITOR: any;
@@ -14,11 +16,12 @@ declare var CKEDITOR: any;
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
   styleUrls: ['./faqs.component.css'],
-  providers: [FaqService]
+  providers: [CatagoryService,FaqService]
 })
 export class FaqsComponent implements OnInit {
 
-  constructor(public faqService: FaqService,
+  constructor(public catagoryService: CatagoryService,
+    public faqService: FaqService,
     public notificationService: NotificationService,
     private dialog: MatDialog,
     private dialogService: DialogService) { }
@@ -26,10 +29,13 @@ export class FaqsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getFaqs();
-
+    this.getCatagories();
   }
    
+  catagories :  Catagory[];
+  catagory   :  Catagory;
   faqs : Faq[];
+  tempArr: Faq[];
   faq  : Faq;
   searchValue : string;
   p: number = 1;
@@ -82,19 +88,19 @@ export class FaqsComponent implements OnInit {
     });
   }
 
-  deleteFaq(id:any){
+  deleteFaq(faq:any){
      
     var faqs = this.faqs;
      this.dialogService.openConfirmDialog('Are you sure to delete this Faq?')
         .afterClosed().subscribe(res=>{
             if(res){
-              this.faqService.deleteFaq(id)
+              this.faqService.deleteFaq(faq._id)
               .subscribe(data => {
                     if(data.n == 1)
                     {
                       for(var i=0;i<faqs.length;i++)
                       {
-                        if(faqs[i]._id == id)
+                        if(faqs[i]._id == faq._id)
                         {
                           faqs.splice(i,1);
                         }
@@ -106,10 +112,29 @@ export class FaqsComponent implements OnInit {
                  .subscribe(() => {
                       this.getFaqs();
               });
-    
+              
               this.getFaqs();
               this.notificationService.warn('! Deleted Successfully');
-             
+              /*
+              for(let eachCatagory of this.catagories){
+           
+                if(faq.catagoryName === eachCatagory.catagoryField){
+                  
+                  console.log(eachCatagory.faq_count)
+                  const updatedCatagory = {
+                    _id                : eachCatagory._id,
+                    catagoryField      : eachCatagory.catagoryField,
+                    Date               : eachCatagory.Date,
+                    faq_count          : eachCatagory.faq_count-1
+                  }
+                      console.log(updatedCatagory);
+                      this.catagoryService.updateCatagory(updatedCatagory)
+                      .subscribe(()=>{
+                          
+                      })
+                      break;
+                }
+              }*/
             }
         })
 
@@ -169,14 +194,36 @@ export class FaqsComponent implements OnInit {
     })
   }
 
+  Array1:any = [];
+  onChange(event:any){
+
+        if(event.target.checked){
+            this.Array1  = this.tempArr.filter((res:any)=>res.status == true);
+            this.faqs = [];
+            this.faqs = this.Array1 ;
+        }
+        else{
+           this.faqs = this.tempArr;
+        }
+  }
+
   private  getFaqs(){
     this.faqService.getFaqs()
       .subscribe((faqs:any) => 
           this.faqs = faqs)
-   /*
+   
    this.faqService.getFaqs()
        .subscribe((faq:any) => 
-           this.tempArr = faq)*/
+           this.tempArr = faq)
+  }
+
+  private  getCatagories(){
+    
+    this.catagoryService.getCatagories()
+      .subscribe((catagories:any) => 
+        {
+              this.catagories = catagories              
+        })
   }
 
   

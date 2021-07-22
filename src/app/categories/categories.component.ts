@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators,FormGroupDirective, NgForm} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
-import {Catagory} from '../shared/catagory.model';
+import { Catagory } from '../shared/catagory.model';
 import { CatagoryService } from '../shared/catagory.service';
 import { FaqService} from '../shared/faq.service';
-import {NotificationService} from '../shared/notification.service';
+import { NotificationService } from '../shared/notification.service';
 import { DialogService } from '../shared/dialog.service';
 import { Faq } from '../shared/faq.model';
 
@@ -49,7 +49,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
        this.getCatagories();
-       this.getFaqs();
+       this.getFaqs_count();
   }
 
   private  getCatagories(){
@@ -59,35 +59,8 @@ export class CategoriesComponent implements OnInit {
             this.catagories = catagories
           })
   }
-
-  /*
-  private getFaqs(){
-    this.faqService.getFaqs()
-        .subscribe((faqs:any) => 
-          { 
-              this.faqs = faqs;
-              /*
-              let i=0;
-              for(let eachCatagory of this.catagories){
-                  let count = 0;
-                  for(let eachFaq of this.faqs){
-                      if(eachCatagory.catagoryField === eachFaq.catagoryName){
-                           count++;
-                      }
-                      
-                  }
-                  let count_object = this.faq_count = {
-                      catagory : eachCatagory.catagoryField,
-                      count    : count
-                  }
-                  this.faqs_count.push(count_object);
-                  i++;
-              }
-              console.log(this.faqs_count);*/
-          /*})
-  }*/
-
-  private  getFaqs(){
+  
+  private  getFaqs_count(){
     this.faqService.getFaqs()
       .subscribe((faqs:any) =>
       { 
@@ -96,8 +69,10 @@ export class CategoriesComponent implements OnInit {
             let count = 0;
             for(let eachFaq of this.faqs){
               if(eachCatagory.catagoryField === eachFaq.catagoryName){
-                   eachCatagory.faq_count++;
+                   
+                  count++;
                    /*
+                   eachCatagory.faq_count++;
                    count++;
                    const updatedCatagory = {
                        _id                : eachCatagory._id,
@@ -105,14 +80,18 @@ export class CategoriesComponent implements OnInit {
                        Date               : eachCatagory.Date,
                        faq_count          : count  
                    }
-                   console.log(updatedCatagory);*/
-                   /*
+                   console.log(updatedCatagory);
+                   
                    this.CatagorysService.updateCatagory(updatedCatagory)
                    .subscribe(()=>{
 
                   })*/
               }
+              /*else{
+                eachCatagory.faq_count = 0;
+              }*/
             }
+            eachCatagory.faq_count = count;
           }
           
       })
@@ -127,7 +106,7 @@ export class CategoriesComponent implements OnInit {
            catagoryField : ''
       })
   }
-
+   
   
   _id             : string;
   catagoryField   : string;
@@ -141,9 +120,8 @@ export class CategoriesComponent implements OnInit {
                _id                : this._id,
                catagoryField      : this.catagoryField,
                Date               : Date.now(),
-               faq_count          : 0
           } 
-         
+          
           this.CatagorysService.addCatagory(newCatagory)
           .subscribe((catagory:any) => {
               this.notificationService.success(':: Submitted successfully'); 
@@ -153,10 +131,17 @@ export class CategoriesComponent implements OnInit {
 
     }
           
+          this.CatagorysService.refreshNeeded$
+          .subscribe(() => {
+              this.getCatagories();
+              this.getFaqs_count();
+          });
+
           this.getCatagories();
+          this.getFaqs_count();
           this.Reset();     
   }
- 
+  
   deleteCatgory(id:any){
     var catagories = this.catagories;
     this.dialogService.openConfirmDialog('Are you sure to delete this Catagory?')
@@ -179,9 +164,11 @@ export class CategoriesComponent implements OnInit {
              this.CatagorysService.refreshNeeded$
                 .subscribe(() => {
                      this.getCatagories();
+                     this.getFaqs_count();
              });
    
              this.getCatagories();
+             this.getFaqs_count();
              this.notificationService.warn('! Deleted Successfully');
             
            }

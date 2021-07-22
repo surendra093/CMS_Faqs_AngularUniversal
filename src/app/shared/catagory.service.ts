@@ -22,7 +22,7 @@ export class CatagoryService {
       return this.http.get<Catagory[]>("http://localhost:3000/catagories/")
 
   }
-
+ 
   addCatagory(newCatagory:any): Observable<Catagory[]>{
         
       var headers = new HttpHeaders();

@@ -27,6 +27,7 @@
     "@angular/router": "~12.0.2",
     "@nguniversal/express-engine": "^12.0.2",
     "@types/ckeditor": "^4.9.10",
+    "angular-froala": "^4.0.3",
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "file-system": "^2.2.2",

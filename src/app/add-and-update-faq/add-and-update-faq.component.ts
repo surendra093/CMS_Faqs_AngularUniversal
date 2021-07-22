@@ -39,7 +39,6 @@ export class AddAndUpdateFaqComponent implements OnInit {
 
   catagories :  Catagory[];
   catagory   :  Catagory;
-  //Editor:any;
   ckeConfig: any;
 
   ngOnInit(): void {  
@@ -120,9 +119,30 @@ export class AddAndUpdateFaqComponent implements OnInit {
           });
 
         }
+        /*
+        let count = 0;
+        for(let eachCatagory of this.catagories){
+           
+            if(this.catagoryName === eachCatagory.catagoryField){
+              
+              const updatedCatagory = {
+                _id                : eachCatagory._id,
+                catagoryField      : eachCatagory.catagoryField,
+                Date               : eachCatagory.Date,
+                faq_count          : eachCatagory.faq_count+1
+              }
+                  console.log(updatedCatagory);
+                  this.catagoryService.updateCatagory(updatedCatagory)
+                  .subscribe(()=>{
+                    console.log(eachCatagory.faq_count)
+                  })
+                  break;
+            }
+        }*/
+            
       }
   }
-
+  
   private  getCatagories(){
     
     this.catagoryService.getCatagories()

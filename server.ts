@@ -8,6 +8,7 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
+/*
 const domino = require('domino');
 const fs = require('fs');
 const path = require('path');
@@ -26,7 +27,36 @@ Object.defineProperty(window.document.body.style, 'transform', {
     };
   },
 });
-global['document'] = window.document;
+global['document'] = window.document;*/
+
+// ssr DOM
+const domino = require('domino');
+const fs = require('fs');
+const Element = domino.impl.Element; // etc
+const HTMLAnchorElement = domino.impl.HTMLAnchorElement;
+// index from browser build!
+const template = fs.readFileSync('./dist/Frontend/browser/index.html').toString();
+// for mock global window by domino
+const win = domino.createWindow(template);
+// mock
+global['window'] = win;
+
+// not implemented property and functions
+Object.defineProperty(win.document.body.style, 'transform', {
+  value: () => {
+    return {
+      enumerable: true,
+      configurable: true,
+    };
+  },
+});
+// mock document
+global['document'] = win.document;
+
+// froala mock
+global['Element'] = Element;
+global['HTMLAnchorElement'] = HTMLAnchorElement;
+
 
 
 // The Express app is exported so that it can be used by serverless Functions.

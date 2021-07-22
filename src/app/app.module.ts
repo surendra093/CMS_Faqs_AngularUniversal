@@ -3,6 +3,7 @@ import { BrowserModule,Title} from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CKEditorModule } from 'ng2-ckeditor';
+//import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,7 +40,7 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
     FormsModule,
     CKEditorModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [Title,CatagoryService,FaqService],
   bootstrap: [AppComponent],
