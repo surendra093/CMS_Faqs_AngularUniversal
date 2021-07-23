@@ -47,7 +47,7 @@ export class FaqsComponent implements OnInit {
   status        : string;
 
   addFaqPopUp(){
-
+  
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -65,7 +65,7 @@ export class FaqsComponent implements OnInit {
     });
 
   }
-
+  
   onUpdate(faq:any){
 
     const dialogConfig = new MatDialogConfig();

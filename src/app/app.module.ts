@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule,Title} from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
-//import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { CatagorySearchfilterPipe } from './catagorySearchfilter.pipe';
 import { FaqSearchfilterPipe } from './faqSearchfilter.pipe';
 import { SafeHtml } from './safeHtml.pipe';
 import { AddAndUpdateFaqComponent } from './add-and-update-faq/add-and-update-faq.component';
+import { AddCatagoryComponent } from './add-catagory/add-catagory.component'
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 
@@ -29,6 +30,7 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
     FaqSearchfilterPipe,
     SafeHtml,
     AddAndUpdateFaqComponent,
+    AddCatagoryComponent,
     MatConfirmDialogComponent
   ],
   imports: [
@@ -40,10 +42,12 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
     CKEditorModule,
     ReactiveFormsModule,
     HttpClientModule,
+    //FroalaEditorModule.forRoot()
+    //FroalaViewModule.forRoot()
   ],
   providers: [Title,CatagoryService,FaqService],
   bootstrap: [AppComponent],
-  entryComponents: [AddAndUpdateFaqComponent,MatConfirmDialogComponent]
+  entryComponents: [AddCatagoryComponent,AddAndUpdateFaqComponent,MatConfirmDialogComponent]
 })
 export class AppModule { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators,FormGroupDirective, NgForm} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 
+import { AddCatagoryComponent } from '../add-catagory/add-catagory.component';
 import { Catagory } from '../shared/catagory.model';
 import { CatagoryService } from '../shared/catagory.service';
 import { FaqService} from '../shared/faq.service';
@@ -9,12 +9,6 @@ import { NotificationService } from '../shared/notification.service';
 import { DialogService } from '../shared/dialog.service';
 import { Faq } from '../shared/faq.model';
 
-// define custom ErrorStateMatcher
-export class CustomErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl, form: NgForm | FormGroupDirective | null) {
-    return control && control.invalid && control.touched;
-  }
-}
 
 @Component({
   selector: 'app-categories',
@@ -25,20 +19,13 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
 
 export class CategoriesComponent implements OnInit {
  
-  catagoryForm = new FormGroup({
-     _id  : new FormControl(''),
-     catagoryFormControl : new FormControl('', [Validators.required])
-  })
-  
-  // create instance of custom ErrorStateMatcher
-  errorMatcher = new CustomErrorStateMatcher();
-  
   constructor(public CatagorysService: CatagoryService,
      public faqService: FaqService,
      public notificationService: NotificationService,
+     private dialog: MatDialog,
      private dialogService: DialogService) { }
 
-  catagories: Catagory[] = [];
+  catagories: Catagory[];
   catagory : Catagory;
   faqs: Faq[];
   faq : Faq;
@@ -51,7 +38,7 @@ export class CategoriesComponent implements OnInit {
        this.getCatagories();
        this.getFaqs_count();
   }
-
+  
   private  getCatagories(){
     this.CatagorysService.getCatagories()
       .subscribe((catagories:any) => 
@@ -78,49 +65,29 @@ export class CategoriesComponent implements OnInit {
       })
   }
   
-  Reset() {
-    this.catagoryForm.reset();
-  }
-  
-  initializeFromGroup(){
-      this.catagoryForm.patchValue({
-           catagoryField : ''
-      })
-  }
-   
-  
   _id             : string;
   catagoryField   : string;
   faq_count       : number;
 
-  onSubmit(){
+  addCatagoryPopUp(){
+  
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    const dialogRef = this.dialog.open(AddCatagoryComponent,dialogConfig);
 
-    if(this.catagoryForm.valid){
+    dialogRef.afterClosed().subscribe( result => {
+      this.CatagorysService.refreshNeeded$
+        .subscribe(() => {
+           this.getCatagories();
+           this.getFaqs_count();
+      });
 
-          const newCatagory =  {
-               _id                : this._id,
-               catagoryField      : this.catagoryField,
-               Date               : Date.now(),
-          } 
-          
-          this.CatagorysService.addCatagory(newCatagory)
-          .subscribe((catagory:any) => {
-              this.notificationService.success(':: Submitted successfully'); 
-          },(err)=>{
-              this.notificationService.warn('!Something went wrong');
-          });
+      this.getCatagories();
+      this.getFaqs_count();
+    });
 
-    }
-          
-          this.CatagorysService.refreshNeeded$
-          .subscribe(() => {
-              this.getCatagories();
-              this.getFaqs_count();
-          });
-
-          this.getCatagories();
-          this.getFaqs_count();
-          this.Reset();     
   }
   
   deleteCatgory(id:any){

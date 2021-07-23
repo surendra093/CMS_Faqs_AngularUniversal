@@ -46,28 +46,7 @@
       placeholder="search for Catagory"
     />
   </span>
-  <form class="CatagoryInput" [formGroup]="catagoryForm" (submit)="onSubmit()">
-    <input type="hidden" formControlName="_id" [(ngModel)]="_id" />
-    <mat-form-field class="form-field" appearance="fill">
-      <mat-label>Enter the Catagory</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="catagoryFormControl"
-        [errorStateMatcher]="errorMatcher"
-        [(ngModel)]="catagoryField"
-        placeholder="Ex: Booking & payment"
-      />
-      <mat-error
-        *ngIf="catagoryForm.controls['catagoryFormControl'].errors?.required"
-      >
-        Catagory is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <button class="btn" type="submit" [disabled]="catagoryForm.invalid">
-      Submit
-    </button>
-  </form>
+  <button class="btn" (click)="addCatagoryPopUp()">Add New Catagory</button>
 </div>
 
 <div *ngIf="catagories.length == 0; else elseBlock">
@@ -91,7 +70,7 @@
           *ngFor="
             let catagory of catagories
               | searchfilter: searchValue
-              | paginate: { itemsPerPage: 7, currentPage: p };
+              | paginate: { itemsPerPage: 7, currentPage: p }
           "
         >
           <td>{{ catagory.catagoryField }}</td>

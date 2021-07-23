@@ -1,0 +1,37 @@
+<div class="container">
+  <mat-toolbar class="tool">
+    <span> Add New Catagory </span>
+    <span class="fill-remaining-space"></span>
+    <button
+      class="btn-dialog-close"
+      mat-stroked-button
+      (click)="onClose()"
+      tabIndex="-1"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+
+<form [formGroup]="catagoryForm" (submit)="onSubmit()">
+  <input type="hidden" formControlName="_id" [(ngModel)]="_id" />
+  <mat-form-field class="form-field" appearance="fill">
+    <mat-label>Enter the Catagory</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="catagoryFormControl"
+      [errorStateMatcher]="errorMatcher"
+      [(ngModel)]="catagoryField"
+      placeholder="Ex: Booking & payment"
+    />
+    <mat-error
+      *ngIf="catagoryForm.controls['catagoryFormControl'].errors?.required"
+    >
+      Catagory is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="catagoryForm.invalid">
+    Submit
+  </button>
+</form>

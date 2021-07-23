@@ -34,17 +34,17 @@
       >
     </mat-form-field>
   </p>
- 
+
   <p class="answer-form-field">
     <mat-label style="color: black; font-size: large"
       ><b>Description</b></mat-label
     >
-    
+
     <ckeditor
       [(ngModel)]="description"
       formControlName="ansFormControl"
-      placeholder ="Enter your description..."
-      [config]= "ckeConfig"
+      placeholder="Enter your description..."
+      [config]="ckeConfig"
     >
     </ckeditor>
     <mat-error
@@ -53,7 +53,7 @@
         faqForm.controls['ansFormControl'].errors?.required
       "
       >Description is Mandatory</mat-error
-      >
+    >
   </p>
 
   <p>

@@ -1,0 +1,48 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+div.container {
+  margin: 0px 0px;
+  margin-right: 5px;
+}
+
+.mat-toolbar.tool {
+  width: 480px;
+  margin-top: 10px;
+  height: 50px;
+}
+
+.mat-toolbar.mat-primary {
+  background: white;
+  color: black;
+}
+
+.form-field {
+  width: 50%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.btn {
+  width: 130px;
+  margin-top: -5px;
+  margin-left: 80px;
+  background-color: #ffd800;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.2);
+  background-color: #212221;
+  color: white;
+}
+
+button[disabled="disabled"],
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+  color: white !important;
+  background-color: #212221 !important;
+}
