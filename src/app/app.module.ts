@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule,Title} from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CKEditorModule } from 'ng2-ckeditor';
 //import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpClientModule } from '@angular/common/http';

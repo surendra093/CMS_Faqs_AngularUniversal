@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './categories/categories.component';
 import { FaqsComponent } from './faqs/faqs.component';
 
-
 const routes: Routes = [
   { path: 'categories', component: CategoriesComponent,data : {  
     title: 'Categories Page'} },

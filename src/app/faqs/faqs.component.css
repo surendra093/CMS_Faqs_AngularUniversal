@@ -186,7 +186,6 @@ table {
   border-spacing: 0;
   border-radius: 12px 12px 3px 3px;
   overflow: hidden;
-  /*text-align: center;*/
   table-layout: fixed;
 }
 
@@ -207,7 +206,6 @@ tr:nth-child(odd) {
 }
 
 .data {
-  /*position: absolute;*/
   right: 0;
   z-index: 1;
   opacity: 0.9;

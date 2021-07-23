@@ -68,28 +68,9 @@ export class CategoriesComponent implements OnInit {
           for(let eachCatagory of this.catagories){
             let count = 0;
             for(let eachFaq of this.faqs){
-              if(eachCatagory.catagoryField === eachFaq.catagoryName){
-                   
-                  count++;
-                   /*
-                   eachCatagory.faq_count++;
-                   count++;
-                   const updatedCatagory = {
-                       _id                : eachCatagory._id,
-                       catagoryField      : eachCatagory.catagoryField,
-                       Date               : eachCatagory.Date,
-                       faq_count          : count  
-                   }
-                   console.log(updatedCatagory);
-                   
-                   this.CatagorysService.updateCatagory(updatedCatagory)
-                   .subscribe(()=>{
-
-                  })*/
+              if(eachCatagory.catagoryField === eachFaq.catagoryName){    
+                       count++; 
               }
-              /*else{
-                eachCatagory.faq_count = 0;
-              }*/
             }
             eachCatagory.faq_count = count;
           }

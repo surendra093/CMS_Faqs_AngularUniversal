@@ -12,7 +12,8 @@ export class FaqSearchfilterPipe implements PipeTransform {
        }
       
        return faqs.filter(faq =>
-        faq.question.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+        faq.question.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+        faq.catagoryName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) );
   }
 
 }

@@ -22,7 +22,6 @@ div.container {
 
 .mat-toolbar.tool2 {
   height: 40px;
-  /*width: 1320px;*/
   width: 96vw;
   margin-top: 0px;
   border-radius: 10px;
@@ -113,7 +112,6 @@ button:disabled {
 table {
   position: relative;
   z-index: 2;
-  /*left: 2%;*/
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -143,7 +141,6 @@ tr:nth-child(odd) {
 }
 
 .data {
-  /*position: absolute;*/
   right: 0;
   z-index: 1;
   opacity: 0.9;

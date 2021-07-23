@@ -16,8 +16,6 @@ import {MatSortModule} from '@angular/material/sort';
 import { BrowserModule } from '@angular/platform-browser';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
-/*import {MatCheckboxModule} from '@angular/material/checkbox';
-import {Ng2OrderModule} from 'ng2-order-pipe';*/
 
 
 @NgModule({
@@ -39,10 +37,7 @@ import {Ng2OrderModule} from 'ng2-order-pipe';*/
     MatPaginatorModule,
     MatSortModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule,
-    /*
-    Ng2OrderModule,
-    MatCheckboxModule*/
+    NgxPaginationModule
   ],
   exports: [
     MatToolbarModule,
@@ -59,10 +54,7 @@ import {Ng2OrderModule} from 'ng2-order-pipe';*/
     MatPaginatorModule,
     MatSortModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule,
-    /*
-    Ng2OrderModule,
-    MatCheckboxModule*/
+    NgxPaginationModule
   ]
 })
 export class MaterialModule { }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
-//import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { AddAndUpdateFaqComponent } from '../add-and-update-faq/add-and-update-faq.component';
 import { NotificationService } from '../shared/notification.service';
@@ -10,7 +9,6 @@ import { Faq } from '../shared/faq.model';
 import { Catagory } from '../shared/catagory.model';
 import { DialogService } from '../shared/dialog.service';
 
-declare var CKEDITOR: any;
 
 @Component({
   selector: 'app-faqs',
@@ -115,26 +113,7 @@ export class FaqsComponent implements OnInit {
               
               this.getFaqs();
               this.notificationService.warn('! Deleted Successfully');
-              /*
-              for(let eachCatagory of this.catagories){
-           
-                if(faq.catagoryName === eachCatagory.catagoryField){
-                  
-                  console.log(eachCatagory.faq_count)
-                  const updatedCatagory = {
-                    _id                : eachCatagory._id,
-                    catagoryField      : eachCatagory.catagoryField,
-                    Date               : eachCatagory.Date,
-                    faq_count          : eachCatagory.faq_count-1
-                  }
-                      console.log(updatedCatagory);
-                      this.catagoryService.updateCatagory(updatedCatagory)
-                      .subscribe(()=>{
-                          
-                      })
-                      break;
-                }
-              }*/
+             
             }
         })
 
@@ -226,5 +205,4 @@ export class FaqsComponent implements OnInit {
         })
   }
 
-  
 }

@@ -8,27 +8,6 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
-/*
-const domino = require('domino');
-const fs = require('fs');
-const path = require('path');
-
-// Use the browser index.html as template for the mock window
-const template = fs.readFileSync(path.join('.', 'dist/FrontEnd/browser', 'index.html')).toString();
-
-// Shim for the global window and document objects.
-const window = domino.createWindow(template);
-global['window'] = window;
-Object.defineProperty(window.document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true,
-    };
-  },
-});
-global['document'] = window.document;*/
-
 // ssr DOM
 const domino = require('domino');
 const fs = require('fs');
